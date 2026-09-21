@@ -114,7 +114,7 @@ class ChatController extends Controller
                 'chat_room_id' => $chatRoom->id,
                 'sender_id' => $exchangeRequest->requester_id,
                 'type' => 'system',
-                'message' => '🎉 เริ่มต้นการพูดคุยสำหรับรายการแลกเปลี่ยนหนังสือ กรุณาประสานงาน นัดหมาย หรือส่งรูปภาพเพิ่มเติมผ่านห้องแชตนี้อย่างปลอดภัย',
+                'message' => '🎉 ระบบเปิดช่องทางสนทนาแล้ว ท่านสามารถนัดหมายและส่งรูปภาพเพิ่มเติมผ่านห้องแชทนี้ได้ทันที',
                 'is_read' => true,
             ]);
         }
