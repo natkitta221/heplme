@@ -2,66 +2,74 @@
     <x-slot name="header">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-                <h2 class="font-bold text-2xl text-slate-800 leading-tight flex items-center gap-2.5">
-                    <span>🔄</span>
-                    <span>จัดการคำขอแลกเปลี่ยนหนังสือ</span>
+                <h2 class="font-bold text-xl text-slate-900 tracking-tight">
+                    จัดการคำขอแลกเปลี่ยนหนังสือ (Exchange Requests)
                 </h2>
-                <p class="text-xs sm:text-sm text-slate-500 mt-1">
-                    ตรวจสอบและตอบรับคำขอแลกเปลี่ยนหนังสือระหว่างคุณกับสมาชิกคนอื่น
+                <p class="text-xs text-slate-500 mt-0.5">
+                    ตรวจสอบและพิจารณาคำขอแลกเปลี่ยนหนังสือระหว่างคุณกับสมาชิกคนอื่นในระบบ
                 </p>
             </div>
 
             <a href="{{ route('matching.index') }}" 
-               class="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs sm:text-sm font-semibold shadow-sm transition-all self-start sm:self-auto">
-                <span>🎯</span>
-                <span>ค้นหาคู่แลกเปลี่ยนใหม่</span>
+               class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-semibold shadow-xs transition-colors self-start sm:self-auto">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18l6-6-6-6"/>
+                    <circle cx="6" cy="12" r="3"/>
+                    <circle cx="18" cy="12" r="3"/>
+                </svg>
+                <span>ค้นหาคู่แลกเปลี่ยน</span>
             </a>
         </div>
     </x-slot>
 
-    <div class="py-8">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6" x-data="{ activeTab: 'received' }">
+    <div class="py-6">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5" x-data="{ activeTab: 'received' }">
 
             {{-- Flash Messages --}}
             @if(session('success'))
-                <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center justify-between shadow-xs">
-                    <div class="flex items-center gap-3">
-                        <span class="text-2xl">🎉</span>
+                <div class="p-3.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center justify-between shadow-xs">
+                    <div class="flex items-center gap-2.5">
+                        <svg class="w-4 h-4 text-emerald-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
                         <div>
-                            <p class="font-bold text-sm">สำเร็จ!</p>
-                            <p class="text-xs text-emerald-700 mt-0.5">{{ session('success') }}</p>
+                            <p class="text-xs font-medium">{{ session('success') }}</p>
                         </div>
                     </div>
-                    <button type="button" @click="$el.parentElement.remove()" class="text-emerald-500 hover:text-emerald-700 text-lg p-1">
+                    <button type="button" @click="$el.parentElement.remove()" class="text-emerald-600 hover:text-emerald-800 text-sm p-1">
                         ✕
                     </button>
                 </div>
             @endif
 
             @if(session('error'))
-                <div class="p-4 rounded-2xl bg-red-50 border border-red-200 text-red-800 flex items-center justify-between shadow-xs">
-                    <div class="flex items-center gap-3">
-                        <span class="text-2xl">⚠️</span>
+                <div class="p-3.5 rounded-lg bg-rose-50 border border-rose-200 text-rose-800 flex items-center justify-between shadow-xs">
+                    <div class="flex items-center gap-2.5">
+                        <svg class="w-4 h-4 text-rose-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
                         <div>
-                            <p class="font-bold text-sm">ไม่สำเร็จ!</p>
-                            <p class="text-xs text-red-700 mt-0.5">{{ session('error') }}</p>
+                            <p class="text-xs font-medium">{{ session('error') }}</p>
                         </div>
                     </div>
-                    <button type="button" @click="$el.parentElement.remove()" class="text-red-500 hover:text-red-700 text-lg p-1">
+                    <button type="button" @click="$el.parentElement.remove()" class="text-rose-600 hover:text-rose-800 text-sm p-1">
                         ✕
                     </button>
                 </div>
             @endif
 
-            {{-- Tab Switcher --}}
-            <div class="bg-white p-1.5 rounded-2xl border border-slate-200 shadow-xs flex items-center gap-2 max-w-2xl mx-auto">
+            {{-- Tab Switcher (Formal) --}}
+            <div class="bg-white p-1 rounded-xl border border-slate-200 shadow-xs flex items-center gap-1.5 max-w-2xl mx-auto">
                 <button 
                     type="button"
                     @click="activeTab = 'received'"
-                    :class="activeTab === 'received' ? 'bg-indigo-600 text-white shadow-sm font-bold' : 'text-slate-600 hover:text-slate-900 font-medium'"
-                    class="flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all duration-150">
-                    <span>📥 คำขอที่ได้รับ</span>
-                    <span :class="activeTab === 'received' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-700'" class="px-2 py-0.5 rounded-full text-xs font-semibold">
+                    :class="activeTab === 'received' ? 'bg-slate-900 text-white font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-medium'"
+                    class="flex-1 py-2 px-3 rounded-lg text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors">
+                    <span>คำขอที่ได้รับ</span>
+                    <span :class="activeTab === 'received' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-700'" class="px-2 py-0.2 rounded text-[11px] font-semibold">
                         {{ $receivedRequests->count() }}
                     </span>
                 </button>
@@ -69,10 +77,10 @@
                 <button 
                     type="button"
                     @click="activeTab = 'sent'"
-                    :class="activeTab === 'sent' ? 'bg-indigo-600 text-white shadow-sm font-bold' : 'text-slate-600 hover:text-slate-900 font-medium'"
-                    class="flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all duration-150">
-                    <span>📤 คำขอที่ส่งไป</span>
-                    <span :class="activeTab === 'sent' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-700'" class="px-2 py-0.5 rounded-full text-xs font-semibold">
+                    :class="activeTab === 'sent' ? 'bg-slate-900 text-white font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-medium'"
+                    class="flex-1 py-2 px-3 rounded-lg text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors">
+                    <span>คำขอที่ส่งออก</span>
+                    <span :class="activeTab === 'sent' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-700'" class="px-2 py-0.2 rounded text-[11px] font-semibold">
                         {{ $sentRequests->count() }}
                     </span>
                 </button>
@@ -80,10 +88,10 @@
                 <button 
                     type="button"
                     @click="activeTab = 'trade_rings'"
-                    :class="activeTab === 'trade_rings' ? 'bg-purple-700 text-white shadow-sm font-bold' : 'text-slate-600 hover:text-slate-900 font-medium'"
-                    class="flex-1 py-2.5 px-3 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all duration-150">
-                    <span>🔄 วงจร 3 ฝ่าย</span>
-                    <span :class="activeTab === 'trade_rings' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-700'" class="px-2 py-0.5 rounded-full text-xs font-semibold">
+                    :class="activeTab === 'trade_rings' ? 'bg-slate-900 text-white font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-medium'"
+                    class="flex-1 py-2 px-3 rounded-lg text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors">
+                    <span>วงแหวน 3 ฝ่าย</span>
+                    <span :class="activeTab === 'trade_rings' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-700'" class="px-2 py-0.2 rounded text-[11px] font-semibold">
                         {{ $tradeRings->count() }}
                     </span>
                 </button>

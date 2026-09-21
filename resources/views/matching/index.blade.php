@@ -2,23 +2,28 @@
     <x-slot name="header">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-                <h2 class="font-extrabold text-2xl sm:text-3xl text-slate-900 leading-tight flex items-center gap-2.5">
-                    <span class="text-3xl">🎯</span>
-                    <span>ระบบจับคู่หนังสืออัจฉริยะ (Smart Matching)</span>
+                <h2 class="font-bold text-xl text-slate-900 tracking-tight">
+                    ระบบจับคู่หนังสือ (Matching System)
                 </h2>
-                <p class="text-sm text-slate-600 font-medium mt-1">
-                    ระบบจับคู่แลกเปลี่ยนอัตโนมัติ ทั้งแบบตรง 2 ทาง (2-Way) และแบบลูกโซ่หมุนเวียน 3 ทาง (3-Way Circular Ring)
+                <p class="text-xs text-slate-500 mt-0.5">
+                    ตรวจสอบโอกาสการแลกเปลี่ยน ทั้งแบบสองทางโดยตรง (2-Way) และแบบลูกโซ่หมุนเวียน (3-Way Circular Ring)
                 </p>
             </div>
 
-            <div class="flex items-center gap-2.5">
-                <a href="{{ route('books.create') }}" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm hover:shadow transition-all">
-                    <span>➕</span>
-                    <span>ลงหนังสือเพิ่ม</span>
+            <div class="flex items-center gap-2">
+                <a href="{{ route('books.create') }}" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold bg-slate-900 text-white hover:bg-slate-800 shadow-xs transition-colors">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+                    <span>ลงทะเบียนหนังสือ</span>
                 </a>
-                <a href="{{ route('wanted-books.create') }}" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-amber-500 text-white hover:bg-amber-600 shadow-sm hover:shadow transition-all">
-                    <span>🔎</span>
-                    <span>ประกาศหาเพิ่ม</span>
+                <a href="{{ route('wanted-books.create') }}" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 border border-slate-300 shadow-xs transition-colors">
+                    <svg class="w-3.5 h-3.5 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    <span>บันทึกความต้องการ</span>
                 </a>
             </div>
         </div>
@@ -28,100 +33,101 @@
         $defaultTab = count($twoWayMatches) > 0 ? 'two_way' : (count($threeWayMatches) > 0 ? 'three_way' : (count($oneWayMatches['wishlist_matches']) > 0 ? 'one_way' : 'two_way'));
     @endphp
 
-    <div class="py-8" x-data="{ activeTab: '{{ $defaultTab }}' }">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+    <div class="py-6" x-data="{ activeTab: '{{ $defaultTab }}' }">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
 
             {{-- Flash Messages --}}
             @if(session('success'))
-                <div class="p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-200 text-emerald-900 flex items-center justify-between shadow-xs">
-                    <div class="flex items-center gap-3">
-                        <span class="text-3xl">🎉</span>
+                <div class="p-3.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center justify-between shadow-xs">
+                    <div class="flex items-center gap-2.5">
+                        <svg class="w-4 h-4 text-emerald-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
                         <div>
-                            <p class="font-extrabold text-sm text-emerald-950">สำเร็จ!</p>
-                            <p class="text-xs sm:text-sm text-emerald-800 font-medium mt-0.5">{{ session('success') }}</p>
+                            <p class="text-xs font-medium">{{ session('success') }}</p>
                         </div>
                     </div>
-                    <button type="button" @click="$el.parentElement.remove()" class="text-emerald-600 hover:text-emerald-900 text-xl font-bold p-1">✕</button>
+                    <button type="button" @click="$el.parentElement.remove()" class="text-emerald-600 hover:text-emerald-800 text-sm p-1">✕</button>
                 </div>
             @endif
 
             @if(session('error'))
-                <div class="p-4 rounded-2xl bg-red-50 border-2 border-red-200 text-red-900 flex items-center justify-between shadow-xs">
-                    <div class="flex items-center gap-3">
-                        <span class="text-3xl">⚠️</span>
+                <div class="p-3.5 rounded-lg bg-rose-50 border border-rose-200 text-rose-800 flex items-center justify-between shadow-xs">
+                    <div class="flex items-center gap-2.5">
+                        <svg class="w-4 h-4 text-rose-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
                         <div>
-                            <p class="font-extrabold text-sm text-red-950">แจ้งเตือน</p>
-                            <p class="text-xs sm:text-sm text-red-800 font-medium mt-0.5">{{ session('error') }}</p>
+                            <p class="text-xs font-medium">{{ session('error') }}</p>
                         </div>
                     </div>
-                    <button type="button" @click="$el.parentElement.remove()" class="text-red-600 hover:text-red-900 text-xl font-bold p-1">✕</button>
+                    <button type="button" @click="$el.parentElement.remove()" class="text-rose-600 hover:text-rose-800 text-sm p-1">✕</button>
                 </div>
             @endif
 
-            {{-- Overall Statistics Summary Banner (High Contrast & Clear Typography) --}}
-            <div class="bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-800 rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
-                <div class="absolute -right-10 -bottom-10 w-56 h-56 bg-purple-400/20 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute -left-10 -top-10 w-56 h-56 bg-indigo-400/20 rounded-full blur-3xl pointer-events-none"></div>
-
-                <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-                    <div class="space-y-2 max-w-xl">
-                        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/20 text-white border border-white/30 backdrop-blur-md text-xs font-extrabold tracking-wide">
-                            <span>✨ ระบบจับคู่อัจฉริยะ</span>
-                        </div>
-                        <h3 class="text-2xl sm:text-3xl font-black text-white leading-tight">
-                            ค้นพบโอกาสแลกเปลี่ยนทั้งหมด <span class="text-amber-300 underline decoration-amber-400 decoration-wavy">{{ $counts['total'] }}</span> รูปแบบ
+            {{-- Overall Statistics Summary Banner (Formal Institutional Style) --}}
+            <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div class="space-y-1 max-w-xl">
+                        <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                            MATCHING OVERVIEW
+                        </span>
+                        <h3 class="text-xl font-bold text-slate-900 leading-tight">
+                            พบโอกาสการแลกเปลี่ยนทั้งหมด {{ $counts['total'] }} รูปแบบ
                         </h3>
-                        <p class="text-indigo-100 text-xs sm:text-sm font-medium leading-relaxed">
-                            จับคู่ทั้งการแลกเปลี่ยนตรงแบบ 2 ฝ่าย และวงจรแลกเปลี่ยนหมุนเวียน 3 ฝ่าย ช่วยให้คุณได้หนังสือเล่มโปรดได้เร็วขึ้น
+                        <p class="text-slate-600 text-xs leading-relaxed">
+                            ระบบคำนวณความตรงกันของรายการหนังสือที่คุณครอบครองและรายการที่สมาชิกท่านอื่นต้องการ
                         </p>
                     </div>
 
                     {{-- Clickable Quick Stat Cards --}}
-                    <div class="grid grid-cols-3 gap-3 shrink-0">
+                    <div class="grid grid-cols-3 gap-2.5 shrink-0">
                         <button 
                             type="button"
                             @click="activeTab = 'two_way'" 
-                            :class="activeTab === 'two_way' ? 'ring-3 ring-white shadow-lg scale-105' : 'opacity-90 hover:opacity-100 hover:scale-102'"
-                            class="p-3 sm:p-4 rounded-2xl bg-white text-slate-800 text-center transition-all duration-200 cursor-pointer shadow-md">
-                            <div class="text-2xl sm:text-3xl font-black text-emerald-600">{{ count($twoWayMatches) }}</div>
-                            <div class="text-xs sm:text-sm font-bold text-slate-800 mt-0.5">จับคู่ 2 ทาง</div>
-                            <div class="text-[10px] text-slate-500 font-medium hidden sm:block">แลกเปลี่ยนตรง</div>
+                            :class="activeTab === 'two_way' ? 'bg-slate-900 text-white' : 'bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200'"
+                            class="p-3 rounded-lg text-center transition-colors cursor-pointer">
+                            <div class="text-xl font-bold">{{ count($twoWayMatches) }}</div>
+                            <div class="text-xs font-medium mt-0.5">จับคู่ 2 ทาง</div>
+                            <div class="text-[10px] opacity-70 hidden sm:block">แลกเปลี่ยนตรง</div>
                         </button>
 
                         <button 
                             type="button"
                             @click="activeTab = 'three_way'" 
-                            :class="activeTab === 'three_way' ? 'ring-3 ring-white shadow-lg scale-105' : 'opacity-90 hover:opacity-100 hover:scale-102'"
-                            class="p-3 sm:p-4 rounded-2xl bg-white text-slate-800 text-center transition-all duration-200 cursor-pointer shadow-md">
-                            <div class="text-2xl sm:text-3xl font-black text-purple-600">{{ count($threeWayMatches) }}</div>
-                            <div class="text-xs sm:text-sm font-bold text-slate-800 mt-0.5">ลูกโซ่ 3 ทาง</div>
-                            <div class="text-[10px] text-slate-500 font-medium hidden sm:block">วงจร 3 ฝ่าย</div>
+                            :class="activeTab === 'three_way' ? 'bg-slate-900 text-white' : 'bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200'"
+                            class="p-3 rounded-lg text-center transition-colors cursor-pointer">
+                            <div class="text-xl font-bold">{{ count($threeWayMatches) }}</div>
+                            <div class="text-xs font-medium mt-0.5">ลูกโซ่ 3 ทาง</div>
+                            <div class="text-[10px] opacity-70 hidden sm:block">วงแหวน 3 ฝ่าย</div>
                         </button>
 
                         <button 
                             type="button"
                             @click="activeTab = 'one_way'" 
-                            :class="activeTab === 'one_way' ? 'ring-3 ring-white shadow-lg scale-105' : 'opacity-90 hover:opacity-100 hover:scale-102'"
-                            class="p-3 sm:p-4 rounded-2xl bg-white text-slate-800 text-center transition-all duration-200 cursor-pointer shadow-md">
-                            <div class="text-2xl sm:text-3xl font-black text-amber-600">{{ count($oneWayMatches['wishlist_matches']) }}</div>
-                            <div class="text-xs sm:text-sm font-bold text-slate-800 mt-0.5">ตรงใจ 1 ทาง</div>
-                            <div class="text-[10px] text-slate-500 font-medium hidden sm:block">ตาม Wishlist</div>
+                            :class="activeTab === 'one_way' ? 'bg-slate-900 text-white' : 'bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200'"
+                            class="p-3 rounded-lg text-center transition-colors cursor-pointer">
+                            <div class="text-xl font-bold">{{ count($oneWayMatches['wishlist_matches']) }}</div>
+                            <div class="text-xs font-medium mt-0.5">ตรงใจ 1 ทาง</div>
+                            <div class="text-[10px] opacity-70 hidden sm:block">ตามความต้องการ</div>
                         </button>
                     </div>
                 </div>
             </div>
 
             {{-- Tabs Navigation Bar --}}
-            <div class="bg-white p-2 rounded-2xl border-2 border-slate-200/90 shadow-sm flex items-center gap-2 overflow-x-auto">
+            <div class="bg-white p-1.5 rounded-xl border border-slate-200 shadow-xs flex items-center gap-1.5 overflow-x-auto">
                 <button 
                     type="button"
                     @click="activeTab = 'two_way'"
-                    :class="activeTab === 'two_way' ? 'bg-indigo-600 text-white shadow-md font-extrabold' : 'text-slate-700 hover:bg-slate-100 font-bold'"
-                    class="flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-150 shrink-0">
-                    <span class="text-base">🎯</span>
+                    :class="activeTab === 'two_way' ? 'bg-slate-900 text-white font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-medium'"
+                    class="flex-1 py-2 px-3.5 rounded-lg text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors shrink-0">
                     <span>จับคู่ตรง 2 ทาง (2-Way)</span>
-                    <span class="px-2.5 py-0.5 rounded-full text-xs font-black"
-                          :class="activeTab === 'two_way' ? 'bg-white text-indigo-700 shadow-xs' : 'bg-slate-200 text-slate-800'">
+                    <span class="px-2 py-0.2 rounded text-[11px] font-semibold"
+                          :class="activeTab === 'two_way' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-700'">
                         {{ count($twoWayMatches) }}
                     </span>
                 </button>
@@ -129,12 +135,11 @@
                 <button 
                     type="button"
                     @click="activeTab = 'three_way'"
-                    :class="activeTab === 'three_way' ? 'bg-indigo-600 text-white shadow-md font-extrabold' : 'text-slate-700 hover:bg-slate-100 font-bold'"
-                    class="flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-150 shrink-0">
-                    <span class="text-base">🔄</span>
+                    :class="activeTab === 'three_way' ? 'bg-slate-900 text-white font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-medium'"
+                    class="flex-1 py-2 px-3.5 rounded-lg text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors shrink-0">
                     <span>จับคู่ลูกโซ่ 3 ทาง (3-Way Ring)</span>
-                    <span class="px-2.5 py-0.5 rounded-full text-xs font-black"
-                          :class="activeTab === 'three_way' ? 'bg-white text-indigo-700 shadow-xs' : 'bg-slate-200 text-slate-800'">
+                    <span class="px-2 py-0.2 rounded text-[11px] font-semibold"
+                          :class="activeTab === 'three_way' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-700'">
                         {{ count($threeWayMatches) }}
                     </span>
                 </button>
@@ -142,12 +147,11 @@
                 <button 
                     type="button"
                     @click="activeTab = 'one_way'"
-                    :class="activeTab === 'one_way' ? 'bg-indigo-600 text-white shadow-md font-extrabold' : 'text-slate-700 hover:bg-slate-100 font-bold'"
-                    class="flex-1 py-3 px-4 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-150 shrink-0">
-                    <span class="text-base">💡</span>
-                    <span>แนะนำความต้องการ (1-Way)</span>
-                    <span class="px-2.5 py-0.5 rounded-full text-xs font-black"
-                          :class="activeTab === 'one_way' ? 'bg-white text-indigo-700 shadow-xs' : 'bg-slate-200 text-slate-800'">
+                    :class="activeTab === 'one_way' ? 'bg-slate-900 text-white font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-medium'"
+                    class="flex-1 py-2 px-3.5 rounded-lg text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors shrink-0">
+                    <span>ความต้องการฝั่งเดียว (1-Way)</span>
+                    <span class="px-2 py-0.2 rounded text-[11px] font-semibold"
+                          :class="activeTab === 'one_way' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-700'">
                         {{ count($oneWayMatches['wishlist_matches']) + count($oneWayMatches['demand_matches']) }}
                     </span>
                 </button>
