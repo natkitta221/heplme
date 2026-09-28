@@ -23,19 +23,13 @@
                     
                     <!-- Logo -->
                     <a href="/" class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-lg bg-violet-700 text-white flex items-center justify-center shadow-xs">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
-                                <path d="M6 6h10"/>
-                                <path d="M6 10h7"/>
-                            </svg>
-                        </div>
+                        <img src="{{ asset('images/logo-icon.png') }}" alt="BookCycle" class="w-9 h-9 object-contain shrink-0">
                         <div class="flex flex-col text-left">
                             <span class="font-bold text-base text-slate-900 tracking-tight leading-tight">
                                 BookCycle
                             </span>
                             <span class="text-[11px] text-slate-500 font-normal">
-                                ระบบบริหารการแลกเปลี่ยนหนังสือ
+                                ระบบบริหารการแลกเปลี่ยนหนังสือแบบหมุนเวียน
                             </span>
                         </div>
                     </a>
@@ -285,7 +279,16 @@
         </section>
 
         <!-- 5. คลังหนังสือในระบบ (Books Showcase) -->
-        <section id="books-showcase" class="py-16 sm:py-20 bg-slate-50">
+        <section id="books-showcase" 
+                 x-data="{ 
+                     modalOpen: false, 
+                     activeBook: null,
+                     openDetail(book) {
+                         this.activeBook = book;
+                         this.modalOpen = true;
+                     }
+                 }" 
+                 class="py-16 sm:py-20 bg-slate-50 relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
@@ -297,7 +300,7 @@
                             หนังสือที่พร้อมให้แลกเปลี่ยนในระบบ
                         </h2>
                         <p class="text-xs sm:text-sm text-slate-500 mt-1">
-                            ตัวอย่างรายการหนังสือที่ลงทะเบียนโดยสมาชิกและพร้อมหมุนเวียน
+                            คลิกที่รายการหนังสือเพื่อดูรายละเอียด (โหมดผู้เยี่ยมชม: ดูได้อย่างเดียว)
                         </p>
                     </div>
 
@@ -309,14 +312,30 @@
                 @if(isset($featuredBooks) && $featuredBooks->count() > 0)
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6">
                         @foreach($featuredBooks as $fBook)
-                            <div class="book-tile bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs flex flex-col group">
+                            @php
+                                $bookData = [
+                                    'id' => $fBook->id,
+                                    'title' => $fBook->title,
+                                    'author' => $fBook->author ?? 'ไม่ระบุผู้แต่ง',
+                                    'category' => $fBook->category ?? 'ทั่วไป',
+                                    'condition' => $fBook->condition ?? 'สภาพดี',
+                                    'status' => $fBook->status,
+                                    'description' => $fBook->description ?: 'เจ้าของหนังสือไม่ได้ระบุรายละเอียดเพิ่มเติม',
+                                    'image' => $fBook->image ? asset('storage/' . $fBook->image) : null,
+                                    'user_name' => $fBook->user->name ?? 'สมาชิก BookCycle',
+                                    'show_url' => route('books.show', $fBook),
+                                ];
+                            @endphp
+                            <div @click="openDetail({{ json_encode($bookData) }})"
+                                 class="book-tile bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col group cursor-pointer relative">
                                 
                                 {{-- Cover --}}
                                 <div class="relative aspect-[3/4] bg-slate-100 overflow-hidden">
                                     @if($fBook->image)
                                         <img src="{{ asset('storage/' . $fBook->image) }}" 
                                              alt="{{ $fBook->title }}" 
-                                             class="w-full h-full object-cover">
+                                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                             onerror="this.onerror=null; this.src='{{ asset('images/logo-icon.png') }}';">
                                     @else
                                         <div class="w-full h-full flex flex-col items-center justify-center bg-slate-100 text-slate-400">
                                             <svg class="w-8 h-8 text-slate-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -329,24 +348,31 @@
                                     @endif
 
                                     <div class="absolute top-2 right-2">
-                                        <span class="px-2 py-0.5 rounded bg-emerald-700 text-white text-[10px] font-semibold">
+                                        <span class="px-2 py-0.5 rounded bg-emerald-700 text-white text-[10px] font-semibold shadow-xs">
                                             พร้อมแลก
                                         </span>
                                     </div>
 
                                     @if($fBook->condition)
                                         <div class="absolute top-2 left-2">
-                                            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-white text-[10px] font-medium">
+                                            <span class="px-2 py-0.5 rounded bg-slate-900/80 text-white text-[10px] font-medium backdrop-blur-xs">
                                                 {{ $fBook->condition }}
                                             </span>
                                         </div>
                                     @endif
+
+                                    {{-- Hover Overlay Hint --}}
+                                    <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                                        <span class="px-3 py-1.5 rounded-lg bg-white text-slate-900 font-semibold text-xs shadow-md">
+                                            🔍 ดูรายละเอียด
+                                        </span>
+                                    </div>
                                 </div>
 
                                 {{-- Details --}}
                                 <div class="p-3.5 flex-1 flex flex-col justify-between">
                                     <div>
-                                        <h4 class="font-semibold text-xs sm:text-sm text-slate-900 line-clamp-1 leading-snug" title="{{ $fBook->title }}">
+                                        <h4 class="font-semibold text-xs sm:text-sm text-slate-900 line-clamp-1 leading-snug group-hover:text-violet-700 transition-colors" title="{{ $fBook->title }}">
                                             {{ $fBook->title }}
                                         </h4>
                                         <p class="text-[11px] text-slate-500 truncate mt-0.5">
@@ -356,6 +382,7 @@
 
                                     <div class="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
                                         <span>สมาชิก: {{ $fBook->user->name ?? '-' }}</span>
+                                        <span class="text-violet-700 font-semibold group-hover:translate-x-0.5 transition-transform">ดูข้อมูล →</span>
                                     </div>
                                 </div>
 
@@ -377,6 +404,145 @@
                     </div>
                 @endif
 
+            </div>
+
+            <!-- Modal แสดงรายละเอียดหนังสือ (โหมดดูได้อย่างเดียว) -->
+            <div x-show="modalOpen" 
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0"
+                 x-transition:enter-end="opacity-100"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="opacity-100"
+                 x-transition:leave-end="opacity-0"
+                 class="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+                 x-cloak
+                 @keydown.escape.window="modalOpen = false">
+
+                <div @click.away="modalOpen = false" 
+                     x-show="modalOpen"
+                     x-transition:enter="transition ease-out duration-300"
+                     x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                     x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                     x-transition:leave="transition ease-in duration-200"
+                     x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                     x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                     class="bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-200 max-w-2xl w-full overflow-hidden flex flex-col max-h-[90vh]">
+                    
+                    <!-- Modal Header -->
+                    <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg">📖</span>
+                            <h3 class="font-bold text-base text-slate-900">
+                                รายละเอียดหนังสือ
+                            </h3>
+                            <span class="ml-2 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
+                                โหมดดูได้อย่างเดียว
+                            </span>
+                        </div>
+                        <button @click="modalOpen = false" 
+                                class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition-colors">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Modal Body (Scrollable) -->
+                    <div class="p-6 overflow-y-auto flex-1">
+                        <template x-if="activeBook">
+                            <div class="flex flex-col sm:flex-row gap-6">
+                                <!-- Book Cover -->
+                                <div class="w-full sm:w-48 shrink-0 flex flex-col items-center">
+                                    <div class="w-40 sm:w-full aspect-[3/4] bg-slate-100 rounded-xl overflow-hidden shadow-md relative border border-slate-200">
+                                        <template x-if="activeBook.image">
+                                            <img :src="activeBook.image" 
+                                                 :alt="activeBook.title" 
+                                                 class="w-full h-full object-cover">
+                                        </template>
+                                        <template x-if="!activeBook.image">
+                                            <div class="w-full h-full flex flex-col items-center justify-center text-slate-400">
+                                                <span class="text-4xl">📚</span>
+                                                <span class="text-[10px] mt-1">ไม่มีรูปปก</span>
+                                            </div>
+                                        </template>
+                                    </div>
+                                    <div class="mt-3 flex flex-wrap gap-1.5 justify-center">
+                                        <span class="px-2 py-0.5 rounded bg-emerald-700 text-white text-[10px] font-semibold">
+                                            พร้อมแลกเปลี่ยน
+                                        </span>
+                                        <template x-if="activeBook.condition">
+                                            <span class="px-2 py-0.5 rounded bg-slate-800 text-white text-[10px] font-medium" x-text="activeBook.condition"></span>
+                                        </template>
+                                    </div>
+                                </div>
+
+                                <!-- Book Info -->
+                                <div class="flex-1 flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <span class="px-2.5 py-0.5 rounded bg-violet-100 text-violet-800 text-xs font-semibold" x-text="activeBook.category"></span>
+                                        </div>
+
+                                        <h2 class="text-xl font-bold text-slate-900 leading-snug" x-text="activeBook.title"></h2>
+                                        <p class="text-xs text-slate-500 mt-1">
+                                            ผู้แต่ง: <span class="font-semibold text-slate-700" x-text="activeBook.author"></span>
+                                        </p>
+                                        <p class="text-xs text-slate-500 mt-0.5">
+                                            ลงทะเบียนโดย: <span class="font-semibold text-slate-700" x-text="activeBook.user_name"></span>
+                                        </p>
+
+                                        <div class="mt-4">
+                                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+                                                รายละเอียดหนังสือ
+                                            </h4>
+                                            <div class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100 max-h-36 overflow-y-auto whitespace-pre-line"
+                                                 x-text="activeBook.description">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- View Only Warning -->
+                                    <div class="mt-5 p-3.5 rounded-xl bg-amber-50 border border-amber-200/90 text-amber-900 text-xs flex items-start gap-2.5">
+                                        <svg class="w-4 h-4 text-amber-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                        </svg>
+                                        <div>
+                                            <span class="font-bold">โหมดผู้เยี่ยมชม (ดูได้อย่างเดียว):</span>
+                                            <p class="mt-0.5 text-amber-800/90 leading-relaxed">
+                                                คุณสามารถดูรายละเอียดหนังสือได้อย่างเดียว ยังไม่สามารถทำรายการหรือส่งคำขอแลกเปลี่ยนได้ หากต้องการแลกเปลี่ยนหนังสือเล่มนี้ กรุณาเข้าสู่ระบบหรือสมัครสมาชิก
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="px-6 py-4 border-t border-slate-100 bg-slate-50/50 flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex items-center gap-2">
+                            <a href="{{ route('login') }}" 
+                               class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-violet-700 hover:bg-violet-800 text-white font-semibold text-xs shadow-xs transition-colors">
+                                <span>🔑 เข้าสู่ระบบเพื่อแลกเปลี่ยน</span>
+                            </a>
+                            <a href="{{ route('register') }}" 
+                               class="inline-flex items-center px-4 py-2 rounded-xl border border-slate-300 hover:bg-white text-slate-700 font-semibold text-xs transition-colors">
+                                <span>สมัครสมาชิกใหม่</span>
+                            </a>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <a :href="activeBook?.show_url" 
+                               class="text-xs text-violet-700 hover:text-violet-900 font-medium underline">
+                                ดูหน้ารายละเอียดเต็ม ↗
+                            </a>
+                            <button @click="modalOpen = false" 
+                                    class="px-3 py-1.5 rounded-lg text-slate-500 hover:text-slate-800 text-xs font-medium">
+                                ปิด
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </section>
 
@@ -403,13 +569,7 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                     <div class="flex items-center gap-3">
-                        <div class="w-7 h-7 rounded bg-slate-800 text-white flex items-center justify-center">
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
-                                <path d="M6 6h10"/>
-                                <path d="M6 10h7"/>
-                            </svg>
-                        </div>
+                        <img src="{{ asset('images/logo-icon.png') }}" alt="BookCycle" class="w-8 h-8 object-contain shrink-0">
                         <div>
                             <span class="font-bold text-slate-900 text-sm">BookCycle Platform</span>
                             <span class="text-slate-400 hidden sm:inline"> | ระบบบริหารการแลกเปลี่ยนหนังสือแบบหมุนเวียน</span>

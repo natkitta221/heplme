@@ -67,7 +67,7 @@ class BookController extends Controller
 
     public function show(Book $book)
     {
-        abort_if($book->user_id !== auth()->id(), 403);
+        $book->load('user');
 
         return view('books.show', compact('book'));
     }

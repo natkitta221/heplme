@@ -85,7 +85,8 @@
                                 @if($book->image)
                                     <img src="{{ asset('storage/' . $book->image) }}"
                                          alt="{{ $book->title }}"
-                                         class="w-full h-full object-cover">
+                                         class="w-full h-full object-cover"
+                                         onerror="this.onerror=null; this.src='{{ asset('images/logo-icon.png') }}';">
                                 @else
                                     <div class="w-full h-full flex flex-col items-center justify-center bg-slate-100 text-slate-400">
                                         <svg class="w-10 h-10 text-slate-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">

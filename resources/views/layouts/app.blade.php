@@ -40,13 +40,7 @@
             <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-slate-500">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div class="flex items-center gap-2.5">
-                        <div class="w-6 h-6 rounded-md bg-slate-800 text-white flex items-center justify-center">
-                            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
-                                <path d="M6 6h10"/>
-                                <path d="M6 10h10"/>
-                            </svg>
-                        </div>
+                        <img src="{{ asset('images/logo-icon.png') }}" alt="BookCycle" class="w-6 h-6 object-contain shrink-0">
                         <span class="font-bold text-slate-800 text-sm tracking-tight">BookCycle Platform</span>
                         <span class="text-xs text-slate-400 hidden sm:inline">| ระบบบริหารการแลกเปลี่ยนหนังสือแบบหมุนเวียน</span>
                     </div>

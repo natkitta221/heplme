@@ -6,13 +6,7 @@
             <div class="flex items-center gap-6 lg:gap-8">
                 <!-- Formal Corporate Logo -->
                 <a href="{{ Auth::user()->role === 'admin' ? route('admin.dashboard') : route('dashboard') }}" class="flex items-center gap-3 shrink-0">
-                    <div class="w-9 h-9 rounded-lg bg-violet-700 text-white flex items-center justify-center shadow-xs">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
-                            <path d="M6 6h10"/>
-                            <path d="M6 10h7"/>
-                        </svg>
-                    </div>
+                    <img src="{{ asset('images/logo-icon.png') }}" alt="BookCycle" class="w-9 h-9 object-contain shrink-0">
                     <div class="flex flex-col text-left">
                         <div class="flex items-center gap-2">
                             <span class="font-bold text-base text-slate-900 tracking-tight leading-tight">

@@ -37,8 +37,9 @@
 
         <!-- Formal Footer -->
         <footer class="py-5 text-center text-xs text-slate-400 border-t border-slate-200 bg-white">
-            <div class="max-w-7xl mx-auto px-4">
-                © {{ date('Y') }} BookCycle. ระบบบริหารการแลกเปลี่ยนหนังสือแบบหมุนเวียน.
+            <div class="max-w-7xl mx-auto px-4 flex items-center justify-center gap-2">
+                <img src="{{ asset('images/logo-icon.png') }}" alt="BookCycle" class="w-5 h-5 object-contain shrink-0">
+                <span>© {{ date('Y') }} BookCycle. ระบบบริหารการแลกเปลี่ยนหนังสือแบบหมุนเวียน.</span>
             </div>
         </footer>
 

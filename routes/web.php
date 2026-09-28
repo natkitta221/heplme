@@ -27,6 +27,11 @@ Route::get('/', function () {
     return view('welcome', compact('featuredBooks', 'totalBooks', 'totalUsers', 'totalExchanges'));
 });
 
+// รายละเอียดหนังสือ (เปิดให้ดูได้ทุกคน รวมถึงผู้เยี่ยมชมที่ยังไม่ล็อกอิน)
+Route::get('/books/{book}', [BookController::class, 'show'])
+    ->whereNumber('book')
+    ->name('books.show');
+
 
 Route::middleware('auth')->group(function () {
 
@@ -94,9 +99,6 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/books', [BookController::class, 'store'])
         ->name('books.store');
-
-    Route::get('/books/{book}', [BookController::class, 'show'])
-        ->name('books.show');
 
     Route::get('/books/{book}/edit', [BookController::class, 'edit'])
         ->name('books.edit');
