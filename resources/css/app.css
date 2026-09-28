@@ -5,6 +5,13 @@
 @layer base {
     body {
         @apply font-sans text-slate-800 antialiased bg-[#f5f7f3];
+        font-family: 'Plus Jakarta Sans', 'Prompt', 'Noto Sans Thai', sans-serif;
+        background-image:
+            radial-gradient(circle at top left, rgba(124, 58, 237, 0.08), transparent 28%),
+            linear-gradient(180deg, #f8f6fc 0%, #f5f7f3 100%);
+        color: #2b1d3d;
+        text-rendering: optimizeLegibility;
+        font-feature-settings: 'cv11', 'ss01', 'rlig' 1;
     }
 }
 
@@ -13,6 +20,74 @@
     --bookcycle-accent: #7c3aed;
     --bookcycle-accent-dark: #5b21b6;
     --bookcycle-focus: rgba(124, 58, 237, 0.18);
+    --bookcycle-ink: #35224f;
+    --bookcycle-muted-ink: #4c3b61;
+}
+
+body :is(h1, h2, h3, h4, h5, h6) {
+    font-family: 'Prompt', 'Plus Jakarta Sans', 'Noto Sans Thai', sans-serif;
+    letter-spacing: -0.02em;
+    line-height: 1.35;
+    text-wrap: balance;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+body :is(h1, h2) {
+    color: var(--bookcycle-ink);
+    font-weight: 700;
+}
+
+body :is(h3, h4, h5, h6) {
+    color: var(--bookcycle-muted-ink);
+}
+
+body p,
+body li,
+body td,
+body label,
+body th,
+body span {
+    letter-spacing: 0.01em;
+    line-height: 1.7;
+    color: #4a3d5f;
+}
+
+body :is(p, li, td, label, th, span) strong,
+body :is(p, li, td, label, th, span) b {
+    color: #2d2044;
+}
+
+body .text-slate-500,
+body .text-slate-600,
+body .text-slate-700,
+body .text-slate-800,
+body .text-slate-900 {
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+body label,
+body th {
+    font-weight: 600;
+}
+
+body strong,
+body b {
+    font-weight: 700;
+}
+
+body .font-sans {
+    font-family: 'Plus Jakarta Sans', 'Prompt', 'Noto Sans Thai', sans-serif;
+}
+
+body a:not([class*="bg-"]):hover {
+    color: var(--bookcycle-accent-dark);
+    text-decoration-color: #c4b5fd;
+    text-underline-offset: 3px;
+}
+
+body :is(a, button):focus-visible {
+    outline: 3px solid var(--bookcycle-focus);
+    outline-offset: 2px;
 }
 
 .app-canvas {

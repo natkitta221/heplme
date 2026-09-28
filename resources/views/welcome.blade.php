@@ -22,8 +22,19 @@
                 <div class="flex justify-between h-16 items-center">
                     
                     <!-- Logo -->
+<<<<<<< HEAD
                     <a href="/" class="flex items-center gap-3">
                         <img src="{{ asset('images/logo-icon.png') }}" alt="BookCycle" class="w-9 h-9 object-contain shrink-0">
+=======
+                    <a href="/" class="flex items-center gap-2.5 group">
+                        <div class="w-10 h-10 rounded-xl bg-violet-700 flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform duration-200">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+                                <path d="M6 6h10"/>
+                                <path d="M6 10h7"/>
+                            </svg>
+                        </div>
+>>>>>>> 9199a0b66b74b437ab440823b7e53604ddb053e9
                         <div class="flex flex-col text-left">
                             <span class="font-bold text-base text-slate-900 tracking-tight leading-tight">
                                 BookCycle
@@ -46,25 +57,19 @@
                         @if (Route::has('login'))
                             @auth
                                 <a href="{{ route('dashboard') }}" 
-                                   class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-violet-700 hover:bg-violet-800 text-white text-xs sm:text-sm font-semibold shadow-xs transition-colors">
-                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <rect width="7" height="9" x="3" y="3" rx="1"/>
-                                        <rect width="7" height="5" x="14" y="3" rx="1"/>
-                                        <rect width="7" height="9" x="14" y="12" rx="1"/>
-                                        <rect width="7" height="5" x="3" y="16" rx="1"/>
-                                    </svg>
-                                    <span>ไปยังหน้าแดชบอร์ด</span>
+                                   class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-violet-700 hover:bg-violet-800 text-white text-xs sm:text-sm font-bold shadow-sm transition-all">
+                                    <span>เข้าสู่ Dashboard</span>
                                 </a>
                             @else
                                 <a href="{{ route('login') }}" 
-                                   class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+                                   class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-700 hover:text-violet-700 hover:bg-slate-100 transition-all">
                                     เข้าสู่ระบบ
                                 </a>
 
                                 @if (Route::has('register'))
                                     <a href="{{ route('register') }}" 
-                                       class="inline-flex items-center px-4 py-2 rounded-lg bg-violet-700 hover:bg-violet-800 text-white text-xs sm:text-sm font-semibold shadow-xs transition-colors">
-                                        สมัครสมาชิก
+                                       class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-violet-700 hover:bg-violet-800 active:scale-95 text-white text-xs sm:text-sm font-bold shadow-sm transition-all">
+                                        <span>สมัครสมาชิก</span>
                                     </a>
                                 @endif
                             @endauth
@@ -75,63 +80,62 @@
             </div>
         </nav>
 
-        <!-- 2. Hero Section (แบบทางการและน่าเชื่อถือ) -->
-        <section class="home-hero py-16 sm:py-24 border-b border-violet-100">
-            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-                
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 text-violet-800 text-xs font-semibold border border-violet-200">
-                    <span class="w-2 h-2 rounded-full bg-violet-600"></span>
-                    <span>แพลตฟอร์มบริหารการแลกเปลี่ยนหนังสือเพื่อชุมชนคนรักการอ่าน</span>
-                </div>
+        <!-- 2. Hero Section -->
+        <section class="home-hero relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center max-w-3xl mx-auto space-y-6">
+                    
+                    <!-- Badge -->
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-50 text-violet-800 text-xs sm:text-sm font-semibold border border-violet-100">
+                        <span>แพลตฟอร์มแลกเปลี่ยนหนังสือสำหรับคนรักการอ่าน</span>
+                    </div>
 
-                <h1 class="text-3xl sm:text-5xl font-bold text-violet-950 tracking-tight leading-tight">
-                    ระบบบริหารและแลกเปลี่ยนหนังสือแบบหมุนเวียน
-                </h1>
+                    <!-- Main Headline -->
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-violet-950 tracking-tight leading-tight">
+                        ระบบแลกเปลี่ยนหนังสือมือสอง<br>
+                        <span class="text-violet-700">
+                            แบบหมุนเวียน (BookCycle)
+                        </span>
+                    </h1>
 
-                <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-3xl mx-auto">
-                    ส่งเสริมการหมุนเวียนทรัพยากรการอ่านอย่างยั่งยืน เปลี่ยนหนังสือที่อ่านจบแล้วให้กลายเป็นประโยชน์แก่เพื่อนสมาชิก ด้วยระบบตรวจสอบการจับคู่แบบสองทาง (Two-way Match) ที่โปร่งใส มีระเบียบ และไม่มีค่าธรรมเนียม
-                </p>
+                    <!-- Subtitle Tagline -->
+                    <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+                        เปลี่ยนหนังสือบนหิ้งที่อ่านจบแล้ว ให้กลายเป็นหนังสือเล่มโปรดเล่มใหม่ ส่งต่อความรู้แบบไม่มีที่สิ้นสุด ด้วยระบบจับคู่อัจฉริยะที่ง่าย สะดวก และไม่มีค่าใช้จ่าย
+                    </p>
 
-                <!-- CTA Buttons -->
-                <div class="pt-4 flex flex-wrap items-center justify-center gap-3">
-                    <a href="#books-showcase" 
-                       class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-violet-700 hover:bg-violet-800 text-white font-semibold text-xs sm:text-sm shadow-md transition-colors">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="8"/>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                        </svg>
-                        <span>ค้นหาหนังสือในคลังระบบ</span>
-                    </a>
-
-                    @auth
-                        <a href="{{ route('books.index') }}" 
-                           class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white hover:bg-slate-50 text-slate-800 font-semibold text-xs sm:text-sm border border-slate-300 shadow-xs transition-colors">
-                            <span>รายการหนังสือของฉัน</span>
+                    <!-- CTA Buttons -->
+                    <div class="pt-4 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+                        <a href="#books-showcase" 
+                           class="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-violet-700 hover:bg-violet-800 active:scale-95 text-white font-semibold text-sm sm:text-base shadow-sm hover:shadow-md transition-all">
+                            <span>ค้นหาหนังสือในระบบ</span>
                         </a>
-                    @else
-                        <a href="{{ route('register') }}" 
-                           class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white hover:bg-slate-50 text-slate-800 font-semibold text-xs sm:text-sm border border-slate-300 shadow-xs transition-colors">
-                            <span>ลงทะเบียนเปิดบัญชีผู้ใช้</span>
-                        </a>
-                    @endauth
-                </div>
 
-                <!-- Statistics Ribbon -->
-                <div class="pt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto text-center border-t border-slate-100">
-                    <div class="hero-metric p-3">
-                        <strong class="text-2xl font-bold">{{ number_format($totalBooks ?? 0) }}</strong>
-                        <div class="text-xs text-slate-500 mt-0.5">หนังสือในคลังระบบ (เล่ม)</div>
+                        @auth
+                            <a href="{{ route('books.index') }}" 
+                               class="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-white hover:bg-slate-50 text-slate-800 font-semibold text-sm sm:text-base border border-slate-200 shadow-sm transition-all">
+                                <span>ดูหนังสือของฉัน</span>
+                            </a>
+                        @else
+                            <a href="{{ route('register') }}" 
+                               class="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-white hover:bg-slate-50 text-slate-800 font-semibold text-sm sm:text-base border border-slate-200 shadow-sm transition-all">
+                                <span>เริ่มต้นสมัครสมาชิกฟรี</span>
+                            </a>
+                        @endauth
                     </div>
-                    <div class="hero-metric p-3 border-t sm:border-t-0 sm:border-x border-slate-100">
-                        <strong class="text-2xl font-bold">{{ number_format($totalUsers ?? 0) }}</strong>
-                        <div class="text-xs text-slate-500 mt-0.5">สมาชิกในระบบ (คน)</div>
-                    </div>
-                    <div class="hero-metric p-3 border-t sm:border-t-0 border-slate-100">
-                        <strong class="text-2xl font-bold">{{ number_format($totalExchanges ?? 0) }}</strong>
-                        <div class="text-xs text-slate-500 mt-0.5">การแลกเปลี่ยนที่สำเร็จ (ครั้ง)</div>
+
+                    <!-- Quick Stats Pill Bar -->
+                    <div class="pt-8 flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm text-slate-500">
+                        <div class="flex items-center gap-2">
+                            <span>หนังสือในระบบ <strong>{{ $totalBooks ?? 0 }}</strong> เล่ม</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span>สมาชิกชุมชน <strong>{{ $totalUsers ?? 0 }}</strong> คน</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span>แลกเปลี่ยนสำเร็จแล้ว <strong>{{ $totalExchanges ?? 0 }}</strong> ครั้ง</span>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </section>
 

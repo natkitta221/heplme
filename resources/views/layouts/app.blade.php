@@ -23,7 +23,7 @@
 
                 <!-- Page Heading -->
                 @isset($header)
-                    <header class="bg-[#fcfaff] border-b border-violet-100">
+                    <header class="bg-[#fcfaff] border-b border-violet-100 sticky top-16 z-20 shadow-sm">
                         <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
                             {{ $header }}
                         </div>
@@ -36,7 +36,6 @@
                 </main>
             </div>
 
-            <!-- Formal Footer -->
             <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-slate-500">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div class="flex items-center gap-2.5">
