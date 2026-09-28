@@ -23,7 +23,7 @@
 
                 <!-- Page Heading -->
                 @isset($header)
-                    <header class="bg-white border-b border-slate-200">
+                    <header class="bg-[#fcfaff] border-b border-violet-100">
                         <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
                             {{ $header }}
                         </div>
@@ -31,7 +31,7 @@
                 @endisset
 
                 <!-- Page Content -->
-                <main class="flex-1">
+                    <main class="flex-1 app-canvas page-arrive">
                     {{ $slot }}
                 </main>
             </div>

@@ -36,10 +36,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
 
             {{-- 1. Formal Welcome Banner --}}
-            <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div class="relative overflow-hidden bg-gradient-to-br from-violet-50 via-white to-sky-50 rounded-xl border border-violet-100 p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div class="max-w-2xl">
                     <div class="flex items-center gap-2 mb-2">
-                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 text-[11px] font-semibold border border-slate-200 uppercase tracking-wider">
+                        <span class="px-2 py-0.5 rounded bg-white text-violet-800 text-[11px] font-semibold border border-violet-200 uppercase tracking-wider">
                             BookCycle System
                         </span>
                         <span class="text-xs text-slate-400">• สมาชิกทั่วไป</span>
@@ -54,7 +54,7 @@
 
                 <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
                     <a href="{{ route('matching.index') }}" 
-                       class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-medium text-xs shadow-xs transition-colors">
+                       class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-violet-700 hover:bg-violet-800 text-white font-medium text-xs shadow-xs transition-colors">
                         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M9 18l6-6-6-6"/>
                             <circle cx="6" cy="12" r="3"/>
@@ -97,7 +97,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     
                     {{-- Card 1: หนังสือของฉัน --}}
-                    <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-xs">
+                    <div class="bg-white rounded-xl p-5 border border-slate-200 border-t-2 border-t-sky-500 shadow-xs">
                         <div class="flex items-start justify-between">
                             <div>
                                 <p class="text-xs font-semibold text-slate-500">หนังสือของฉัน</p>
@@ -107,7 +107,7 @@
                                     <span>พร้อมแลก {{ $myAvailableBooksCount }} เล่ม</span>
                                 </p>
                             </div>
-                            <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center">
+                            <div class="w-10 h-10 rounded-lg bg-sky-50 text-sky-700 flex items-center justify-center">
                                 <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
                                     <path d="M6 6h10"/>
@@ -126,7 +126,7 @@
                     </div>
 
                     {{-- Card 2: หนังสือที่ตามหา --}}
-                    <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-xs">
+                    <div class="bg-white rounded-xl p-5 border border-slate-200 border-t-2 border-t-amber-500 shadow-xs">
                         <div class="flex items-start justify-between">
                             <div>
                                 <p class="text-xs font-semibold text-slate-500">หนังสือที่ต้องการ</p>
@@ -136,7 +136,7 @@
                                     <span>รายการที่กำลังตามหา</span>
                                 </p>
                             </div>
-                            <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center">
+                            <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center">
                                 <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <circle cx="11" cy="11" r="8"/>
                                     <line x1="21" y1="21" x2="16.65" y2="16.65"/>
@@ -154,7 +154,7 @@
                     </div>
 
                     {{-- Card 3: คำขอแลกเปลี่ยน --}}
-                    <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-xs">
+                    <div class="bg-white rounded-xl p-5 border border-slate-200 border-t-2 border-t-rose-500 shadow-xs">
                         <div class="flex items-start justify-between">
                             <div>
                                 <p class="text-xs font-semibold text-slate-500">คำขอรอดำเนินการ</p>
@@ -165,7 +165,7 @@
                                     ได้รับ {{ $receivedPendingCount }} | ส่งออก {{ $sentPendingCount }}
                                 </p>
                             </div>
-                            <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-700 flex items-center justify-center">
                                 <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="m16 3 4 4-4 4"/>
                                     <path d="M20 7H4"/>
@@ -185,7 +185,7 @@
                     </div>
 
                     {{-- Card 4: คู่ที่ตรงกัน (Matching) --}}
-                    <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-xs">
+                    <div class="bg-white rounded-xl p-5 border border-slate-200 border-t-2 border-t-violet-500 shadow-xs">
                         <div class="flex items-start justify-between">
                             <div>
                                 <p class="text-xs font-semibold text-slate-500">คู่ที่ตรงกัน (Match)</p>
@@ -198,7 +198,7 @@
                                     @endif
                                 </p>
                             </div>
-                            <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center">
+                            <div class="w-10 h-10 rounded-lg bg-violet-50 text-violet-700 flex items-center justify-center">
                                 <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M9 18l6-6-6-6"/>
                                     <circle cx="6" cy="12" r="3"/>
@@ -221,7 +221,7 @@
             <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-xs">
                 <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-100 gap-4 md:gap-0">
                     <div class="flex items-center gap-3 px-3 py-1">
-                        <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center shrink-0">
+                        <div class="w-8 h-8 rounded-lg bg-sky-50 text-sky-700 ring-1 ring-sky-100 flex items-center justify-center shrink-0">
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
                                 <circle cx="9" cy="7" r="4"/>
@@ -234,7 +234,7 @@
                     </div>
 
                     <div class="flex items-center gap-3 px-3 py-1 md:pl-6">
-                        <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center shrink-0">
+                        <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-700 ring-1 ring-amber-100 flex items-center justify-center shrink-0">
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
                                 <path d="M6 6h10"/>
@@ -248,7 +248,7 @@
                     </div>
 
                     <div class="flex items-center gap-3 px-3 py-1 md:pl-6">
-                        <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center shrink-0">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100 flex items-center justify-center shrink-0">
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="20 6 9 17 4 12"/>
                             </svg>
@@ -278,15 +278,15 @@
                 @if($communityBooks->count() > 0)
                     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                         @foreach($communityBooks as $cBook)
-                            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs hover:border-slate-300 transition-all flex flex-col group">
+                            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs hover:-translate-y-1 hover:border-emerald-300 hover:shadow-md transition-all duration-200 flex flex-col group">
                                 {{-- Book Cover --}}
                                 <div class="relative aspect-[3/4] bg-slate-100 overflow-hidden">
                                     @if($cBook->image)
                                         <img src="{{ asset('storage/' . $cBook->image) }}" 
                                              alt="{{ $cBook->title }}" 
-                                             class="w-full h-full object-cover">
+                                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
                                     @else
-                                        <div class="w-full h-full flex flex-col items-center justify-center bg-slate-100 text-slate-400">
+                                            <div class="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-violet-50 to-sky-100 text-slate-400">
                                             <svg class="w-8 h-8 text-slate-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                                 <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
                                                 <path d="M6 6h10"/>
@@ -355,14 +355,14 @@
                         @foreach($recentRequests as $req)
                             <div class="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-50 transition-colors">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-8 h-8 rounded-lg {{ $req->requester_id === Auth::id() ? 'bg-slate-100 text-slate-700' : 'bg-slate-100 text-slate-700' }} flex items-center justify-center shrink-0">
+                                    <div class="w-8 h-8 rounded-lg {{ $req->requester_id === Auth::id() ? 'bg-sky-50 text-sky-700' : 'bg-emerald-50 text-emerald-700' }} flex items-center justify-center shrink-0">
                                         @if($req->requester_id === Auth::id())
-                                            <svg class="w-4 h-4 text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <line x1="22" y1="2" x2="11" y2="13"/>
                                                 <polygon points="22 2 15 22 11 13 2 9 22 2"/>
                                             </svg>
                                         @else
-                                            <svg class="w-4 h-4 text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                                                 <polyline points="7 10 12 15 17 10"/>
                                                 <line x1="12" y1="15" x2="12" y2="3"/>

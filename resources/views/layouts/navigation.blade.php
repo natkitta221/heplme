@@ -6,7 +6,7 @@
             <div class="flex items-center gap-6 lg:gap-8">
                 <!-- Formal Corporate Logo -->
                 <a href="{{ Auth::user()->role === 'admin' ? route('admin.dashboard') : route('dashboard') }}" class="flex items-center gap-3 shrink-0">
-                    <div class="w-9 h-9 rounded-lg {{ Auth::user()->role === 'admin' ? 'bg-slate-900' : 'bg-slate-800' }} text-white flex items-center justify-center shadow-xs">
+                    <div class="w-9 h-9 rounded-lg bg-violet-700 text-white flex items-center justify-center shadow-xs">
                         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
                             <path d="M6 6h10"/>
@@ -40,7 +40,7 @@
                         <!-- 1. ภาพรวมระบบ -->
                         @php $isDashboardActive = request()->routeIs('admin.dashboard'); @endphp
                         <a href="{{ route('admin.dashboard') }}" 
-                           class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs xl:text-sm font-medium transition-colors {{ $isDashboardActive ? 'bg-slate-900 text-white font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
+                           class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs xl:text-sm font-medium transition-colors {{ $isDashboardActive ? 'bg-violet-700 text-white font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
                             <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect width="7" height="9" x="3" y="3" rx="1"/>
                                 <rect width="7" height="5" x="14" y="3" rx="1"/>
@@ -53,7 +53,7 @@
                         <!-- 2. จัดการสมาชิก -->
                         @php $isUsersActive = request()->routeIs('admin.users.*'); @endphp
                         <a href="{{ route('admin.users.index') }}" 
-                           class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs xl:text-sm font-medium transition-colors {{ $isUsersActive ? 'bg-slate-900 text-white font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
+                           class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs xl:text-sm font-medium transition-colors {{ $isUsersActive ? 'bg-violet-700 text-white font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
                             <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
                                 <circle cx="9" cy="7" r="4"/>
@@ -69,7 +69,7 @@
                         <!-- 3. จัดการหนังสือ -->
                         @php $isBooksActive = request()->routeIs('admin.books.*'); @endphp
                         <a href="{{ route('admin.books.index') }}" 
-                           class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs xl:text-sm font-medium transition-colors {{ $isBooksActive ? 'bg-slate-900 text-white font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
+                           class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs xl:text-sm font-medium transition-colors {{ $isBooksActive ? 'bg-violet-700 text-white font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
                             <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
                                 <path d="M6 6h10"/>
@@ -84,7 +84,7 @@
                         <!-- 4. หนังสือที่ต้องการ -->
                         @php $isWantedActive = request()->routeIs('admin.wanted-books.*'); @endphp
                         <a href="{{ route('admin.wanted-books.index') }}" 
-                           class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs xl:text-sm font-medium transition-colors {{ $isWantedActive ? 'bg-slate-900 text-white font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
+                           class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs xl:text-sm font-medium transition-colors {{ $isWantedActive ? 'bg-violet-700 text-white font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
                             <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="11" cy="11" r="8"/>
                                 <line x1="21" y1="21" x2="16.65" y2="16.65"/>
@@ -98,7 +98,7 @@
                         <!-- 5. คำขอแลกเปลี่ยน -->
                         @php $isExchangeActive = request()->routeIs('admin.exchange-requests.*'); @endphp
                         <a href="{{ route('admin.exchange-requests.index') }}" 
-                           class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs xl:text-sm font-medium transition-colors {{ $isExchangeActive ? 'bg-slate-900 text-white font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
+                           class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs xl:text-sm font-medium transition-colors {{ $isExchangeActive ? 'bg-violet-700 text-white font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
                             <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="m16 3 4 4-4 4"/>
                                 <path d="M20 7H4"/>
@@ -114,7 +114,7 @@
                         <!-- 6. รายงานปัญหา -->
                         @php $isReportsActive = request()->routeIs('admin.reports.*'); @endphp
                         <a href="{{ route('admin.reports.index') }}" 
-                           class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs xl:text-sm font-medium transition-colors {{ $isReportsActive ? 'bg-slate-900 text-white font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
+                           class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs xl:text-sm font-medium transition-colors {{ $isReportsActive ? 'bg-violet-700 text-white font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
                             <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
                                 <line x1="12" y1="9" x2="12" y2="13"/>

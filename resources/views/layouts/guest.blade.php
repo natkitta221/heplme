@@ -15,7 +15,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased text-slate-800 bg-slate-50 min-h-screen flex flex-col justify-between selection:bg-slate-800 selection:text-white">
+    <body class="font-sans antialiased text-slate-800 bg-[#f6f3fa] min-h-screen flex flex-col justify-between selection:bg-violet-800 selection:text-white">
 
         <!-- Header / Back to home -->
         <header class="py-4 px-6 flex justify-between items-center max-w-7xl mx-auto w-full">
@@ -29,8 +29,8 @@
         </header>
 
         <!-- Main Content (Centered Form Card) -->
-        <main class="flex-1 flex flex-col justify-center items-center px-4 py-8 sm:py-12">
-            <div class="w-full sm:max-w-md bg-white p-6 sm:p-8 rounded-xl border border-slate-200 shadow-sm">
+        <main class="flex-1 guest-canvas page-arrive flex flex-col justify-center items-center px-4 py-8 sm:py-12">
+            <div class="auth-panel w-full sm:max-w-md bg-white p-6 sm:p-8 rounded-xl border border-slate-200">
                 {{ $slot }}
             </div>
         </main>

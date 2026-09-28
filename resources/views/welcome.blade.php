@@ -14,7 +14,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased text-slate-800 bg-slate-50 selection:bg-slate-800 selection:text-white">
+    <body class="font-sans antialiased text-slate-800 bg-[#f6f3fa] selection:bg-violet-800 selection:text-white">
         
         <!-- 1. Top Formal Navigation Bar -->
         <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-xs">
@@ -23,7 +23,7 @@
                     
                     <!-- Logo -->
                     <a href="/" class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-lg bg-slate-900 text-white flex items-center justify-center shadow-xs">
+                        <div class="w-9 h-9 rounded-lg bg-violet-700 text-white flex items-center justify-center shadow-xs">
                             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
                                 <path d="M6 6h10"/>
@@ -52,7 +52,7 @@
                         @if (Route::has('login'))
                             @auth
                                 <a href="{{ route('dashboard') }}" 
-                                   class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-semibold shadow-xs transition-colors">
+                                   class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-violet-700 hover:bg-violet-800 text-white text-xs sm:text-sm font-semibold shadow-xs transition-colors">
                                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <rect width="7" height="9" x="3" y="3" rx="1"/>
                                         <rect width="7" height="5" x="14" y="3" rx="1"/>
@@ -69,7 +69,7 @@
 
                                 @if (Route::has('register'))
                                     <a href="{{ route('register') }}" 
-                                       class="inline-flex items-center px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-semibold shadow-xs transition-colors">
+                                       class="inline-flex items-center px-4 py-2 rounded-lg bg-violet-700 hover:bg-violet-800 text-white text-xs sm:text-sm font-semibold shadow-xs transition-colors">
                                         สมัครสมาชิก
                                     </a>
                                 @endif
@@ -82,15 +82,15 @@
         </nav>
 
         <!-- 2. Hero Section (แบบทางการและน่าเชื่อถือ) -->
-        <section class="py-16 sm:py-24 bg-white border-b border-slate-200">
+        <section class="home-hero py-16 sm:py-24 border-b border-violet-100">
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
                 
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold border border-slate-200">
-                    <span class="w-2 h-2 rounded-full bg-slate-700"></span>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 text-violet-800 text-xs font-semibold border border-violet-200">
+                    <span class="w-2 h-2 rounded-full bg-violet-600"></span>
                     <span>แพลตฟอร์มบริหารการแลกเปลี่ยนหนังสือเพื่อชุมชนคนรักการอ่าน</span>
                 </div>
 
-                <h1 class="text-3xl sm:text-5xl font-bold text-slate-900 tracking-tight leading-tight">
+                <h1 class="text-3xl sm:text-5xl font-bold text-violet-950 tracking-tight leading-tight">
                     ระบบบริหารและแลกเปลี่ยนหนังสือแบบหมุนเวียน
                 </h1>
 
@@ -101,7 +101,7 @@
                 <!-- CTA Buttons -->
                 <div class="pt-4 flex flex-wrap items-center justify-center gap-3">
                     <a href="#books-showcase" 
-                       class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm shadow-xs transition-colors">
+                       class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-violet-700 hover:bg-violet-800 text-white font-semibold text-xs sm:text-sm shadow-md transition-colors">
                         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="11" cy="11" r="8"/>
                             <line x1="21" y1="21" x2="16.65" y2="16.65"/>
@@ -124,16 +124,16 @@
 
                 <!-- Statistics Ribbon -->
                 <div class="pt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto text-center border-t border-slate-100">
-                    <div class="p-3">
-                        <div class="text-2xl font-bold text-slate-900">{{ number_format($totalBooks ?? 0) }}</div>
+                    <div class="hero-metric p-3">
+                        <strong class="text-2xl font-bold">{{ number_format($totalBooks ?? 0) }}</strong>
                         <div class="text-xs text-slate-500 mt-0.5">หนังสือในคลังระบบ (เล่ม)</div>
                     </div>
-                    <div class="p-3 border-t sm:border-t-0 sm:border-x border-slate-100">
-                        <div class="text-2xl font-bold text-slate-900">{{ number_format($totalUsers ?? 0) }}</div>
+                    <div class="hero-metric p-3 border-t sm:border-t-0 sm:border-x border-slate-100">
+                        <strong class="text-2xl font-bold">{{ number_format($totalUsers ?? 0) }}</strong>
                         <div class="text-xs text-slate-500 mt-0.5">สมาชิกในระบบ (คน)</div>
                     </div>
-                    <div class="p-3 border-t sm:border-t-0 border-slate-100">
-                        <div class="text-2xl font-bold text-slate-900">{{ number_format($totalExchanges ?? 0) }}</div>
+                    <div class="hero-metric p-3 border-t sm:border-t-0 border-slate-100">
+                        <strong class="text-2xl font-bold">{{ number_format($totalExchanges ?? 0) }}</strong>
                         <div class="text-xs text-slate-500 mt-0.5">การแลกเปลี่ยนที่สำเร็จ (ครั้ง)</div>
                     </div>
                 </div>
@@ -160,9 +160,9 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     
                     {{-- 1. หนังสือหมุนเวียน --}}
-                    <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-xs flex flex-col justify-between">
+                    <div class="feature-tile bg-white rounded-xl p-6 border border-slate-200 shadow-xs flex flex-col justify-between">
                         <div>
-                            <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-violet-50 text-violet-700 ring-1 ring-violet-100 flex items-center justify-center mb-4">
                                 <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
                                     <path d="M6 6h10"/>
@@ -182,9 +182,9 @@
                     </div>
 
                     {{-- 2. Smart Matching --}}
-                    <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-xs flex flex-col justify-between">
+                    <div class="feature-tile bg-white rounded-xl p-6 border border-slate-200 shadow-xs flex flex-col justify-between">
                         <div>
-                            <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-sky-50 text-sky-700 ring-1 ring-sky-100 flex items-center justify-center mb-4">
                                 <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M9 18l6-6-6-6"/>
                                     <circle cx="6" cy="12" r="3"/>
@@ -204,9 +204,9 @@
                     </div>
 
                     {{-- 3. โปร่งใสและมีระเบียบ --}}
-                    <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-xs flex flex-col justify-between">
+                    <div class="feature-tile bg-white rounded-xl p-6 border border-slate-200 shadow-xs flex flex-col justify-between">
                         <div>
-                            <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-700 ring-1 ring-amber-100 flex items-center justify-center mb-4">
                                 <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                                 </svg>
@@ -247,8 +247,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     
                     {{-- Step 1 --}}
-                    <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
-                        <div class="w-8 h-8 rounded bg-slate-900 text-white font-bold text-sm flex items-center justify-center mb-4">
+                    <div class="workflow-step bg-violet-50/70 rounded-xl p-6 border border-violet-100">
+                        <div class="w-8 h-8 rounded bg-violet-700 text-white font-bold text-sm flex items-center justify-center mb-4">
                             1
                         </div>
                         <h4 class="font-bold text-base text-slate-900">บันทึกข้อมูลหนังสือ</h4>
@@ -258,8 +258,8 @@
                     </div>
 
                     {{-- Step 2 --}}
-                    <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
-                        <div class="w-8 h-8 rounded bg-slate-900 text-white font-bold text-sm flex items-center justify-center mb-4">
+                    <div class="workflow-step bg-sky-50/70 rounded-xl p-6 border border-sky-100">
+                        <div class="w-8 h-8 rounded bg-sky-700 text-white font-bold text-sm flex items-center justify-center mb-4">
                             2
                         </div>
                         <h4 class="font-bold text-base text-slate-900">ระบุรายการที่ต้องการ</h4>
@@ -269,8 +269,8 @@
                     </div>
 
                     {{-- Step 3 --}}
-                    <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
-                        <div class="w-8 h-8 rounded bg-slate-900 text-white font-bold text-sm flex items-center justify-center mb-4">
+                    <div class="workflow-step bg-amber-50/70 rounded-xl p-6 border border-amber-100">
+                        <div class="w-8 h-8 rounded bg-amber-600 text-white font-bold text-sm flex items-center justify-center mb-4">
                             3
                         </div>
                         <h4 class="font-bold text-base text-slate-900">จับคู่และยืนยันการแลก</h4>
@@ -309,7 +309,7 @@
                 @if(isset($featuredBooks) && $featuredBooks->count() > 0)
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6">
                         @foreach($featuredBooks as $fBook)
-                            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs hover:border-slate-300 transition-all flex flex-col group">
+                            <div class="book-tile bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs flex flex-col group">
                                 
                                 {{-- Cover --}}
                                 <div class="relative aspect-[3/4] bg-slate-100 overflow-hidden">
@@ -381,7 +381,7 @@
         </section>
 
         <!-- 6. Formal CTA Banner -->
-        <section class="py-14 bg-slate-900 text-white text-center">
+        <section class="py-14 bg-violet-950 text-white text-center border-t-4 border-violet-500">
             <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
                 <h2 class="text-xl sm:text-3xl font-bold tracking-tight">
                     เริ่มต้นใช้งานระบบ BookCycle ได้แล้ววันนี้
