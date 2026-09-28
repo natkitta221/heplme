@@ -107,7 +107,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/books/{book}', [BookController::class, 'destroy'])
         ->name('books.destroy');
 
-    // Wanted Books
+    // Wanted Books88
     Route::get('/wanted-books', [WantedBookController::class, 'index'])
         ->name('wanted-books.index');
 
